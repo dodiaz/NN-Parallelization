@@ -1,4 +1,4 @@
-How to run the helloworld.py file in gcp (I might have missed one or two steps but I think these are the most important ones):
+How to run the helloworld.py file in gcp (I might have missed one or two steps but I think these are the most important ones) which uses mpi4py to print "hello world" to the command line:
 
 ```python
 sudo apt-get install build-essential

@@ -12,7 +12,6 @@ sudo apt-get install python-pip
 pip install mpi4py
 cd mpi4py_testing
 
-
 mpiexec -n 5 python helloworld.py
 ```
 

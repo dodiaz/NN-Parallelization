@@ -10,8 +10,8 @@ sudo apt-get install openmpi-bin
 sudo apt-get install python
 sudo apt-get install python-pip
 pip install mpi4py
-cd mpi4py_testing
 
+cd mpi4py_testing
 mpiexec -n 4 python helloworld.py
 ```
 

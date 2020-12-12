@@ -1,15 +1,24 @@
 How to run the helloworld.py file in gcp (I might have missed one or two steps but I think these are the most important ones):
 
+
 sudo apt-get install build-essential
+
 sudo apt-get install git google-perftools  
 
 git clone https://github.com/dodiaz/NN-Parallelization.git
+
 git checkout Dominic
+
 sudo apt-get install openmpi-bin
+
 sudo apt-get install python
+
 sudo apt-get install python-pip
+
 pip install mpi4py
+
 cd mpi4py_testing
+
 
 mpiexec -n 5 python helloworld.py
 

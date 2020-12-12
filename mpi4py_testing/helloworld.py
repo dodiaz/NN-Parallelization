@@ -1,5 +1,11 @@
+#!/usr/bin/env python
+
 from mpi4py import MPI
-comm = MPI.COMM_WORLD
-name=MPI.Get_processor_name()
-print("hello world")
-print(("name:",name,"my rank is",comm.rank))
+import sys
+
+size = MPI.COMM_WORLD.Get_size()
+rank = MPI.COMM_WORLD.Get_rank()
+name = MPI.Get_processor_name()
+
+sys.stdout.write("Hello world! I am processor " + str(rank) + " of " + str(size) + " on " +  str(name) + ". \n") 
+

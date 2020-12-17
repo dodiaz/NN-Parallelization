@@ -1,8 +1,14 @@
 #!/usr/bin/env python
 import sys
-from mpi4py import MPI
+
 
 sys.stdout.write("Only one processor will print this (hopefully) \n")
+
+
+
+from mpi4py import MPI
+
+sys.stdout.write("Only one processor will print this (hopefully, test 2) \n")
 
 MPI_Init(NULL, NULL);
 

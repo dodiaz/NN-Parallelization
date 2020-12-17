@@ -19,8 +19,6 @@ if (rank == 0):
 import torch
 from torchvision import transforms
 import torchvision.datasets as datasets
-import matplotlib.pyplot as plt
-import numpy as np
 
 ## Define the model
 
@@ -51,5 +49,6 @@ class Model(torch.nn.Module):
         return pred
     
     
+print("Hello")
     
     

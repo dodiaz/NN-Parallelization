@@ -50,7 +50,6 @@ class Model(torch.nn.Module):
     
     
     
-    
 ## Train the model
     
 mnist_trainset = datasets.MNIST(root='./data', train=True, download=True, transform=transforms.Compose([transforms.ToTensor()]))
@@ -117,7 +116,7 @@ for epoch in range(no_epochs):
     total_val_loss = total_val_loss / (itr + 1)
     val_loss.append(total_val_loss)
 
-    print('\nFrom processor ' + str(rank) + ' Epoch: {}/{}, Train Loss: {:.8f}, Val Loss: {:.8f}, Val Accuracy: {:.8f}'.format(epoch + 1, no_epochs, total_train_loss, total_val_loss, accuracy))
+    print('\nEpoch: {}/{}, Train Loss: {:.8f}, Val Loss: {:.8f}, Val Accuracy: {:.8f}'.format(epoch + 1, no_epochs, total_train_loss, total_val_loss, accuracy))
 
     if total_val_loss < best_val_loss:
         best_val_loss = total_val_loss

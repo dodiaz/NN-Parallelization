@@ -16,7 +16,10 @@ import torch
 from torchvision import transforms
 import torchvision.datasets as datasets
 
-from models import Model
+import sys
+sys.path.insert(0, 'ArchTests/')
+
+from model0 import Model
 
 
     

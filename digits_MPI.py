@@ -19,7 +19,14 @@ import torchvision.datasets as datasets
 import sys
 sys.path.insert(0, 'ArchTests/')
 
-from model0 import Model
+if (rank == 0):
+    from model0 import Model
+if (rank == 1):
+    from model1 import Model
+if (rank == 2):
+    from model2 import Model
+if (rank == 3):
+    from model3 import Model
 
 
     

@@ -16,7 +16,9 @@ import torch
 from torchvision import transforms
 import torchvision.datasets as datasets
 
-import models
+from models import Model
+
+
     
     
 ## Train the model

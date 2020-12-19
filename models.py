@@ -1,6 +1,6 @@
 import torch
 
-class Model0(torch.nn.Module):
+class Model(torch.nn.Module):
     def __init__(self):
         super(Model, self).__init__()
         self.conv_1 = torch.nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1)

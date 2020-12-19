@@ -10,11 +10,7 @@ if (rank == 0):
     sys.stdout.write("Only one processor will print this \n")
 
 sys.stdout.write("Hello world! I am processor " + str(rank) + " of " + str(size) + " on " +  str(name) + ". \n") 
-
-if (rank == 0):
-    sys.stdout.write("Only one processor will print this \n")
-    
-    
+   
     
 import torch
 from torchvision import transforms
@@ -111,7 +107,7 @@ for epoch in range(no_epochs):
             if label[i] == torch.max(p.data, 0)[1]:
                 total = total + 1
 
-    accuracy = total / len(mnist_valset)
+    accuracy = float(total) / len(mnist_valset)
 
     total_val_loss = total_val_loss / (itr + 1)
     val_loss.append(total_val_loss)
@@ -140,6 +136,5 @@ for itr, (image, label) in enumerate(test_dataloader):
             correct = correct + 1
             results.append((image, torch.max(p.data, 0)[1]))
 
-test_accuracy = correct/len(mnist_testset)
-print('\nTest accuracy {:.8f}'.format(test_accuracy))
-
+test_accuracy = float(correct)/len(mnist_testset)
+print('\nTest accuracy ' + str(test_accuracy))

@@ -3,8 +3,8 @@ import torch
 class Model(torch.nn.Module):
     def __init__(self):
         super(Model, self).__init__()
-        self.conv_1 = torch.nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1)
-        self.conv_2 = torch.nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
+        self.conv_1 = torch.nn.Conv2d(in_channels=1, out_channels=32, kernel_size=5, stride=1, padding=2)
+        self.conv_2 = torch.nn.Conv2d(in_channels=32, out_channels=64, kernel_size=5, stride=1, padding=2)
         self.max_pool2d = torch.nn.MaxPool2d(kernel_size=2, stride=2)
         self.linear_1 = torch.nn.Linear(7 * 7 * 64, 128)
         self.linear_2 = torch.nn.Linear(128, 10)

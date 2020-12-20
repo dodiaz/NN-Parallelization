@@ -1,23 +1,18 @@
 #!/usr/bin/env python
 import sys
-from mpi4py import MPI
-
-size = MPI.COMM_WORLD.Get_size()
-rank = MPI.COMM_WORLD.Get_rank()
-name = MPI.Get_processor_name()
-
-if (rank == 0): 
-    sys.stdout.write("Only one processor will print this \n")
-
-sys.stdout.write("Hello world! I am processor " + str(rank) + " of " + str(size) + " on " +  str(name) + ". \n") 
-   
-    
+from mpi4py import MPI   
 import torch
 from torchvision import transforms
 import torchvision.datasets as datasets
 
 import sys
 sys.path.insert(0, 'ArchTests/')
+
+
+size = MPI.COMM_WORLD.Get_size()
+rank = MPI.COMM_WORLD.Get_rank()
+name = MPI.COMM_WORLD.Get_name()
+
 
 if (rank == 0):
     from model0 import Model
@@ -97,16 +92,16 @@ for epoch in range(no_epochs):
     total_val_loss = total_val_loss / (itr + 1)
     val_loss.append(total_val_loss)
 
-    print('\nEpoch: {}/{}, Train Loss: {:.8f}, Val Loss: {:.8f}, Val Accuracy: {:.8f}'.format(epoch + 1, no_epochs, total_train_loss, total_val_loss, accuracy))
+    print('\nFrom rank {}, Epoch: {}/{}, Train Loss: {:.8f}, Val Loss: {:.8f}, Val Accuracy: {:.8f}'.format(rank, epoch + 1, no_epochs, total_train_loss, total_val_loss, accuracy))
 
     if total_val_loss < best_val_loss:
         best_val_loss = total_val_loss
-        print("Saving the model state dictionary for Epoch: {} with Validation loss: {:.8f}".format(epoch + 1, total_val_loss))
-        torch.save(model.state_dict(), "model.dth")
+        print("From rank {}, Saving the model state dictionary for Epoch: {} with Validation loss: {:.8f}".format(rank, epoch + 1, total_val_loss))
+        torch.save(model.state_dict(), "TrainedModels/model" + str(rank) + ".dth")
 
 
 # test model
-model.load_state_dict(torch.load("model.dth"))
+model.load_state_dict(torch.load("TrainedModels/model" + str(rank) + ".dth"))
 model.eval()
 
 results = list()

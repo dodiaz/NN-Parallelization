@@ -9,4 +9,6 @@ Description of the code base:
 4. TrainedModels contains the trained networks after digits_MPI.py is run
 
 To run the code, download all of the necessary python libaries (mpi4py, torch, and torchvision) then run the following command: 
-> mpiexec -n 4 python digits_MPI.py
+```
+mpiexec -n 4 python digits_MPI.py
+```

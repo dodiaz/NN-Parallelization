@@ -5,7 +5,6 @@ import torch
 from torchvision import transforms
 import torchvision.datasets as datasets
 
-import sys
 sys.path.insert(0, 'ArchTests/')
 
 

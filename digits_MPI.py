@@ -13,6 +13,7 @@ size = MPI.COMM_WORLD.Get_size()
 rank = MPI.COMM_WORLD.Get_rank()
 name = MPI.COMM_WORLD.Get_name()
 
+comm = MPI.COMM_WORLD
 
 if (rank == 0):
     from model0 import Model
@@ -37,9 +38,11 @@ train_dataloader = torch.utils.data.DataLoader(mnist_trainset, batch_size=64, sh
 val_dataloader = torch.utils.data.DataLoader(mnist_valset, batch_size=32, shuffle=False)
 test_dataloader = torch.utils.data.DataLoader(mnist_testset, batch_size=32, shuffle=False)
 
-print("Training dataset size: ", len(mnist_trainset))
-print("Validation dataset size: ", len(mnist_valset))
-print("Testing dataset size: ", len(mnist_testset))
+if (rank == 0):
+    print("Training dataset size: " + str( len(mnist_trainset)))
+    print("Validation dataset size: " + str( len(mnist_valset)))
+    print("Testing dataset size: " + str( len(mnist_testset)))
+    print("Commencing training networks using MPI4PY")
 
 
 model = Model()
@@ -96,7 +99,7 @@ for epoch in range(no_epochs):
 
     if total_val_loss < best_val_loss:
         best_val_loss = total_val_loss
-        print("From rank {}, Saving the model state dictionary for Epoch: {} with Validation loss: {:.8f}".format(rank, epoch + 1, total_val_loss))
+        print("Saving the model state dictionary for Epoch: {} with Validation loss: {:.8f}".format(epoch + 1, total_val_loss))
         torch.save(model.state_dict(), "TrainedModels/model" + str(rank) + ".dth")
 
 
@@ -117,4 +120,11 @@ for itr, (image, label) in enumerate(test_dataloader):
             results.append((image, torch.max(p.data, 0)[1]))
 
 test_accuracy = float(correct)/len(mnist_testset)
-print('\nTest accuracy ' + str(test_accuracy))
+print('Test accuracy ' + str(test_accuracy))
+
+
+#communcate among the processors and find the minimum loss which corresponds to the Neural network which trained the best in the first epoch
+max_class_acc = comm.allreduce(test_accuracy, op=MPI.MAX)
+
+if (max_class_acc == test_accuracy): 
+    print("\nRank " + str(rank) + " trained the best network(in terms of classification accuracy on the test data)! The architecture can be found in ArchTests directory under name model" + str(rank) + " and is saved in the TrainedModels directory under name model" + str(rank) + ".dth. You can continue training with that model or just train from scratch.")

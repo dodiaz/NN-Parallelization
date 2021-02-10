@@ -12,3 +12,5 @@ To run the code, download all of the necessary python libaries (mpi4py, torch, a
 ```
 mpiexec -n 4 python digits_MPI.py
 ```
+
+FUTURE: test data parallelism and splitting a single neural network architecture across processors

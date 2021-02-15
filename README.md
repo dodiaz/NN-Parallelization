@@ -1,5 +1,5 @@
 Finding the right architecture when applying a neural network to some classification problem is an expensive and time consuming endeavor. In this repository we use MPI4PY 
-(a python library for using MPI) to parallelize the testing of various neural network architectures. 
+(a python library for using MPI) to parallelize the testing of various neural network architectures (hyperparameter tuning). 
 
 
 Description of the code base:
